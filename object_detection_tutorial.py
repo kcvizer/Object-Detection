@@ -39,7 +39,7 @@ sys.path.append("..")
 # ## Object detection imports
 # Here are the imports from the object detection module.
 
-# In[ ]:
+# In[3]:
 
 from utils import label_map_util
 
@@ -54,7 +54,7 @@ from utils import visualization_utils as vis_util
 # 
 # By default we use an "SSD with Mobilenet" model here. See the [detection model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md) for a list of other models that can be run out-of-the-box with varying speeds and accuracies.
 
-# In[3]:
+# In[4]:
 
 # What model to download.
 MODEL_NAME = 'ssd_mobilenet_v1_coco_2017_11_17'
@@ -72,7 +72,7 @@ NUM_CLASSES = 90
 
 # ## Download Model
 
-# In[4]:
+# In[5]:
 
 opener = urllib.request.URLopener()
 opener.retrieve(DOWNLOAD_BASE + MODEL_FILE, MODEL_FILE)
@@ -85,7 +85,7 @@ for file in tar_file.getmembers():
 
 # ## Load a (frozen) Tensorflow model into memory.
 
-# In[5]:
+# In[6]:
 
 detection_graph = tf.Graph()
 with detection_graph.as_default():
@@ -108,7 +108,7 @@ category_index = label_map_util.create_category_index(categories)
 
 # ## Helper code
 
-# In[ ]:
+# In[7]:
 
 def load_image_into_numpy_array(image):
   (im_width, im_height) = image.size
@@ -118,7 +118,7 @@ def load_image_into_numpy_array(image):
 
 # # Detection
 
-# In[7]:
+# In[8]:
 
 # For the sake of simplicity we will use only 2 images:
 # image1.jpg
@@ -131,7 +131,7 @@ TEST_IMAGE_PATHS = [ os.path.join(PATH_TO_TEST_IMAGES_DIR, 'image{}.jpg'.format(
 IMAGE_SIZE = (12, 8)
 
 
-# In[8]:
+# In[9]:
 #The following code will detect the objects from the photos.
 
 with detection_graph.as_default():
