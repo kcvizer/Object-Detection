@@ -27,7 +27,7 @@ if tf.__version__ != '1.4.0':
 
 # ## Env setup
 
-# In[ ]:
+# In[2]:
 
 # This is needed to display the images.
 get_ipython().magic('matplotlib inline')
@@ -54,7 +54,7 @@ from utils import visualization_utils as vis_util
 # 
 # By default we use an "SSD with Mobilenet" model here. See the [detection model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md) for a list of other models that can be run out-of-the-box with varying speeds and accuracies.
 
-# In[ ]:
+# In[3]:
 
 # What model to download.
 MODEL_NAME = 'ssd_mobilenet_v1_coco_2017_11_17'
@@ -72,7 +72,7 @@ NUM_CLASSES = 90
 
 # ## Download Model
 
-# In[ ]:
+# In[4]:
 
 opener = urllib.request.URLopener()
 opener.retrieve(DOWNLOAD_BASE + MODEL_FILE, MODEL_FILE)
@@ -85,7 +85,7 @@ for file in tar_file.getmembers():
 
 # ## Load a (frozen) Tensorflow model into memory.
 
-# In[ ]:
+# In[5]:
 
 detection_graph = tf.Graph()
 with detection_graph.as_default():
@@ -99,7 +99,7 @@ with detection_graph.as_default():
 # ## Loading label map
 # Label maps map indices to category names, so that when our convolution network predicts `5`, we know that this corresponds to `airplane`.  Here we use internal utility functions, but anything that returns a dictionary mapping integers to appropriate string labels would be fine
 
-# In[ ]:
+# In[6]:
 
 label_map = label_map_util.load_labelmap(PATH_TO_LABELS)
 categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
@@ -118,7 +118,7 @@ def load_image_into_numpy_array(image):
 
 # # Detection
 
-# In[ ]:
+# In[7]:
 
 # For the sake of simplicity we will use only 2 images:
 # image1.jpg
@@ -131,7 +131,8 @@ TEST_IMAGE_PATHS = [ os.path.join(PATH_TO_TEST_IMAGES_DIR, 'image{}.jpg'.format(
 IMAGE_SIZE = (12, 8)
 
 
-# In[2]:
+# In[8]:
+#The following code will detect the objects from the photos.
 
 with detection_graph.as_default():
   with tf.Session(graph=detection_graph) as sess:
@@ -166,14 +167,6 @@ with detection_graph.as_default():
           line_thickness=8)
       plt.figure(figsize=IMAGE_SIZE)
       plt.imshow(image_np)
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
 
 
 
