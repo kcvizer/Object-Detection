@@ -1,5 +1,5 @@
 
-
+#importing the libraries
 import numpy as np
 import os
 import six.moves.urllib as urllib
@@ -20,7 +20,7 @@ get_ipython().magic('matplotlib inline')
 # This is needed since the notebook is stored in the object_detection folder.
 sys.path.append("..")
 
-
+# Used from importing libraries from object_detection
 from utils import label_map_util
 
 from utils import visualization_utils as vis_util
@@ -81,11 +81,14 @@ category_index = label_map_util.create_category_index(categories)
 
 import cv2
 cap = cv2.VideoCapture(0)
+#if using more than one webcam then change the value of 0 to 1(i.e. the line below)
+#cap = cv2.VideoCapture(1)
 
 # Running the tensorflow session
 with detection_graph.as_default():
   with tf.Session(graph=detection_graph) as sess:
    ret = True
+#this will return recording from the video
    while (ret):
       ret,image_np = cap.read()
       # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
@@ -113,7 +116,9 @@ with detection_graph.as_default():
           line_thickness=8)
 #      plt.figure(figsize=IMAGE_SIZE)
 #      plt.imshow(image_np)
+#shows the live feed with object detection with 1280x960 dimensions
       cv2.imshow('image',cv2.resize(image_np,(1280,960)))
+	#pressing q will terminate the feed
       if cv2.waitKey(25) & 0xFF == ord('q'):
           cv2.destroyAllWindows()
           cap.release()
